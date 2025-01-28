@@ -33,7 +33,7 @@ public class EkaController {
         return "This is the contact page";
     }
 
-    @RequestMapping("/hello")
+    @RequestMapping("/hello1")
     @ResponseBody
     public String returnHello(
             @RequestParam(name = "location") String location,
