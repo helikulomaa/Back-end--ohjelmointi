@@ -3,7 +3,10 @@ package k25.bookstore.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -48,5 +51,17 @@ public class BookController {
     public String deleteBook(@PathVariable("id") Long bookId) {
         repository.deleteById(bookId);
         return "redirect:../booklist";
+    }
+
+    @GetMapping(value = "/edit/{id}")
+    public String showEditForm(@PathVariable("id") Long bookId, Model model) {
+        model.addAttribute("book", repository.findById(bookId));
+        return "editbook";
+    }
+
+    @PostMapping("/edit")
+    public String editBook(@ModelAttribute Book book) {
+        repository.save(book);
+        return "redirect:/booklist";
     }
 }
