@@ -3,32 +3,37 @@
 
 <head>
     <title>Booklist</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 
 <body>
-    <h1>Books</h1>
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Publication Year</th>
-            <th>ISBN</th>
-            <th>Price</th>
-        </tr>
-        <tr th:each="book : ${books}">
-            <td th:text="${book.title}"></td>
-            <td th:text="${book.author}"></td>
-            <td th:text="${book.publicationYear}"></td>
-            <td th:text="${book.isbn}"></td>
-            <td th:text="${book.price}"></td>
+    <div class="container" , style="margin-top: 50px;">
+        <h1>Books</h1>
+        <table class="table table-striped">
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Publication Year</th>
+                <th>ISBN</th>
+                <th>Price</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.publicationYear}"></td>
+                <td th:text="${book.isbn}"></td>
+                <td th:text="${book.price}"></td>
 
-            <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
-            <td><a th:href="@{/edit/{id}(id=${book.id})}">Edit Book</a></td>
+                <td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
+                <td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-success">Edit Book</a></td>
 
-        </tr>
-    </table>
-    <a href="/add">Add Book</a>
+            </tr>
+        </table>
+        <a class="btn btn-success" href="/add">Add Book</a>
+    </div>
 </body>
 
 </html>
