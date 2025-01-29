@@ -21,7 +21,7 @@ public class StudentController {
         opiskelijat.add(new Student("Maikki", "Mallevaara"));
     }
 
-    @GetMapping("/hello")
+    @GetMapping("/helloStudents")
     public String showStudents(Model model) {
         model.addAttribute("students", opiskelijat);
         return "studentList";
