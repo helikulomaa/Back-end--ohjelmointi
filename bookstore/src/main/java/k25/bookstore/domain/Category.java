@@ -20,6 +20,13 @@ public class Category {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private List<Book> books;
 
+    public Category() {
+    }
+
+    public Category(String name) {
+        this.name = name;
+    }
+
     public List<Book> getBooks() {
         return books;
     }
@@ -28,16 +35,11 @@ public class Category {
         this.books = books;
     }
 
-    @Override
-    public String toString() {
-        return "Category [id=" + categoryid + ", name=" + name + "]";
-    }
-
-    public long getId() {
+    public long getCategoryid() {
         return categoryid;
     }
 
-    public void setId(long categoryid) {
+    public void setCategoryid(long categoryid) {
         this.categoryid = categoryid;
     }
 
@@ -49,12 +51,9 @@ public class Category {
         this.name = name;
     }
 
-    public Category() {
-    }
-
-    public Category(long categoryid, String name) {
-        this.categoryid = categoryid;
-        this.name = name;
+    @Override
+    public String toString() {
+        return "Category [id=" + categoryid + ", name=" + name + "]";
     }
 
 }

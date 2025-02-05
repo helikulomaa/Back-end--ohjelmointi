@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import jakarta.validation.Valid;
 import k25.bookstore.domain.Book;
 import k25.bookstore.domain.BookRepository;
+import k25.bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
@@ -25,6 +26,9 @@ public class BookController {
 
     @Autowired
     private BookRepository repository;
+
+    @Autowired
+    private CategoryRepository crepository;
 
     // constructor injection - works only if only one constructor
     public BookController(BookRepository repository) {
@@ -40,6 +44,7 @@ public class BookController {
     @RequestMapping(value = "/add")
     public String addSBook(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", crepository.findAll());
         return "addbook";
     }
 
@@ -69,6 +74,7 @@ public class BookController {
     public String editBook(@Valid @ModelAttribute Book book, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("book", book);
+            model.addAttribute("categories", crepository.findAll());
             return "editbook";
         }
         repository.save(book);
