@@ -3,6 +3,7 @@ package k25.bookstore.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import jakarta.validation.Valid;
 import k25.bookstore.domain.Book;
 import k25.bookstore.domain.BookRepository;
 
@@ -42,7 +44,11 @@ public class BookController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(Book book) {
+    public String save(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("books", book);
+            return "addbook";
+        }
         repository.save(book);
         return "redirect:booklist";
     }
@@ -60,7 +66,11 @@ public class BookController {
     }
 
     @PostMapping("/edit")
-    public String editBook(@ModelAttribute Book book) {
+    public String editBook(@Valid @ModelAttribute Book book, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("book", book);
+            return "editbook";
+        }
         repository.save(book);
         return "redirect:/booklist";
     }
