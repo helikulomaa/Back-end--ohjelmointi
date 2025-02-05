@@ -67,6 +67,7 @@ public class BookController {
     @GetMapping(value = "/edit/{id}")
     public String showEditForm(@PathVariable("id") Long bookId, Model model) {
         model.addAttribute("book", repository.findById(bookId));
+        model.addAttribute("categories", crepository.findAll());
         return "editbook";
     }
 
