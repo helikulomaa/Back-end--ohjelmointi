@@ -32,6 +32,7 @@ public class BookstoreApplication {
 			repository.save(new Book("1984", "George Orwell", 1949, "123-456-789", 10.0, category1));
 			repository.save(new Book("Brave New World", "Aldous Huxley", 1932, "987-654-321", 12.0, category1));
 			repository.save(new Book("Fahrenheit 451", "Ray Bradbury", 1953, "321-654-987", 11.0, category1));
+			repository.save(new Book("Nexus", "Noah Harari", 2014, "654-321-987", 15.0, category2));
 		};
 	}
 
