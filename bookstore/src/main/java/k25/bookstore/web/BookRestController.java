@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +30,21 @@ public class BookRestController {
     @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
     public Optional<Book> findBookRest(@PathVariable("id") Long bookId) {
         return repository.findById(bookId);
+    }
+
+    @RequestMapping(value = "/books", method = RequestMethod.POST)
+    public Book saveNewBookRest(@RequestBody Book book) {
+        return repository.save(book);
+    }
+
+    @RequestMapping(value = "/books/{id}", method = RequestMethod.PUT)
+    public Book updateBookRest(@PathVariable("id") Long bookId, @RequestBody Book book) {
+        return repository.save(book);
+    }
+
+    @RequestMapping(value = "/books/{id}", method = RequestMethod.DELETE)
+    public void deleteBookRest(@PathVariable("id") Long bookId) {
+        repository.deleteById(bookId);
     }
 
 }
