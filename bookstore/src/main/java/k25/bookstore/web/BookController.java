@@ -19,6 +19,11 @@ import k25.bookstore.domain.CategoryRepository;
 @Controller
 public class BookController {
 
+    @RequestMapping(value = "/login")
+    public String login() {
+        return "login";
+    }
+
     @RequestMapping("/index")
     public String returnIndex() {
         return "index";
