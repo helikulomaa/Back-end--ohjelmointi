@@ -24,25 +24,31 @@ public class BookstoreApplication {
 			AppUserRepository urepository) {
 		return (args) -> {
 
-			// save a couple of categories
-			Category category1 = new Category("Fiction");
-			Category category2 = new Category("Non-Fiction");
+			if (repository.count() == 0) {
 
-			crepository.save(category1);
-			crepository.save(category2);
+				// save a couple of categories
+				Category category1 = new Category("Fiction");
+				Category category2 = new Category("Non-Fiction");
 
-			// save a couple of books
-			repository.save(new Book("1984", "George Orwell", 1949, "123-456-789", 10.0, category1));
-			repository.save(new Book("Brave New World", "Aldous Huxley", 1932, "987-654-321", 12.0, category1));
-			repository.save(new Book("Fahrenheit 451", "Ray Bradbury", 1953, "321-654-987", 11.0, category1));
-			repository.save(new Book("Nexus", "Noah Harari", 2014, "654-321-987", 15.0, category2));
+				crepository.save(category1);
+				crepository.save(category2);
 
-			// Create users: admin/admin user/user
-			AppUser user1 = new AppUser("user", "$2a$10$EY1L6HC672X2i.1HgFsaheQncKBFJuK5o85KdOwlISXrmHovlX3GO", "USER");
-			AppUser user2 = new AppUser("admin", "$2a$10$CSwyw8VBNrPKStUVXB1p2e5hgGOgcQUwFXQ4b8CDfc4SILb5Mxd3K",
-					"ADMIN");
-			urepository.save(user1);
-			urepository.save(user2);
+				// save a couple of books
+				repository.save(new Book("1984", "George Orwell", 1949, "123-456-789", 10.0, category1));
+				repository.save(new Book("Brave New World", "Aldous Huxley", 1932, "987-654-321", 12.0, category1));
+				repository.save(new Book("Fahrenheit 451", "Ray Bradbury", 1953, "321-654-987", 11.0, category1));
+				repository.save(new Book("Nexus", "Noah Harari", 2014, "654-321-987", 15.0, category2));
+			}
+
+			if (urepository.count() == 0) {
+				// Create users: admin/admin user/user
+				AppUser user1 = new AppUser("user", "$2a$10$EY1L6HC672X2i.1HgFsaheQncKBFJuK5o85KdOwlISXrmHovlX3GO",
+						"USER");
+				AppUser user2 = new AppUser("admin", "$2a$10$CSwyw8VBNrPKStUVXB1p2e5hgGOgcQUwFXQ4b8CDfc4SILb5Mxd3K",
+						"ADMIN");
+				urepository.save(user1);
+				urepository.save(user2);
+			}
 		};
 	}
 
